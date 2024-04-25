@@ -26,6 +26,8 @@ namespace SistemaCadastro.Controllers
             return View(_repositorio.ObterVeiculos());
         }
 
+
+
         [HttpGet]
         public ActionResult IncluirVeiculo()
         {
@@ -43,7 +45,7 @@ namespace SistemaCadastro.Controllers
 
                     if (_repositorio.IncluirVeiculo(veiculoObj))
                     {
-                        ViewBag.Mensagem = "Veículo Cadastrado com Sucesso!";
+                        ViewBag.Mensagem = ("Veículo Cadastrado com Sucesso!");
                     }
                 }
 
@@ -72,7 +74,7 @@ namespace SistemaCadastro.Controllers
             try
             {
                 _repositorio = new VeiculosRepo();
-                _repositorio.AtualizarVeiculo(veiculoObj);
+                
                 if (_repositorio.AtualizarVeiculo(veiculoObj))
                 {
                     ViewBag.Mensagem = "Veículo atualizado com sucesso!!";
@@ -96,16 +98,13 @@ namespace SistemaCadastro.Controllers
                 }
 
                 return RedirectToAction("ObterVeiculos");
+                
             }
             catch (Exception)
             {
                 return View("ObterVeiculos");
             }
         }
-
-
-
-
 
 
     }
