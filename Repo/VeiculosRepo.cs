@@ -18,7 +18,6 @@ namespace SistemaCadastro.Repo
             string constr = ConfigurationManager.ConnectionStrings["stringConexao"].ToString();
             _con = new SqlConnection(constr);
         }
-        //Adiciono um Veículo(Através da PROCEDURE "IncluirVeiculo" criada no tabela "Veiculos"), Abaixo:
         public bool IncluirVeiculo(Veiculos veiculoObj)
         {
             Connection();
@@ -47,8 +46,7 @@ namespace SistemaCadastro.Repo
 
             _con.Close();
             return true;
-        }
-        //Obtenho todos os veículos, (PROCEDURE "ObterVeiculos"), Abaixo:        
+        }        
         public List<Veiculos> ObterVeiculos()
         {
             Connection();
@@ -87,7 +85,6 @@ namespace SistemaCadastro.Repo
                 return veiculosList;
             }
         }
-        //Atualizo o time,(PROCEDURE "AtualizarVeiculo"), Abaixo:
         public bool AtualizarVeiculo(Veiculos veiculoObj)
         {
             Connection();
@@ -153,6 +150,33 @@ namespace SistemaCadastro.Repo
 
             return rowsAffected >= 1; 
         }
+
+        public List<string> ObterStatus()
+        {
+            Connection();
+            List<string> statusList = new List<string>();
+
+            string query = "SELECT DISTINCT Situacao FROM Veiculos";
+
+            using (SqlCommand command = new SqlCommand(query, _con))
+            {
+                _con.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string status = Convert.ToString(reader["Situacao"]);
+                    statusList.Add(status);
+                }
+
+                _con.Close();
+            }
+
+            return statusList;
+        }
+
+
 
 
     }

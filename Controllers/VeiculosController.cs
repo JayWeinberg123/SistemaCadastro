@@ -2,13 +2,8 @@
 using SistemaCadastro.Repo;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls.WebParts;
 
 namespace SistemaCadastro.Controllers
 {
@@ -65,8 +60,19 @@ namespace SistemaCadastro.Controllers
         public ActionResult AtualizarVeiculo(int id)
         {
             _repositorio = new VeiculosRepo();
+
+            
+            List<string> statusList = _repositorio.ObterStatus();
+
+            
+            List<SelectListItem> selectList = statusList.Select(status => new SelectListItem { Text = status, Value = status }).ToList();
+
+            
+            ViewBag.StatusList = selectList;
+
             return View(_repositorio.ObterVeiculos().Find(t => t.VeiculosId == id));
         }
+
 
         [HttpPost]
         public ActionResult AtualizarVeiculo(int id, Veiculos veiculoObj)
@@ -74,7 +80,7 @@ namespace SistemaCadastro.Controllers
             try
             {
                 _repositorio = new VeiculosRepo();
-                
+
                 if (_repositorio.AtualizarVeiculo(veiculoObj))
                 {
                     ViewBag.Mensagem = "Veículo atualizado com sucesso!!";
@@ -98,7 +104,7 @@ namespace SistemaCadastro.Controllers
                 }
 
                 return RedirectToAction("ObterVeiculos");
-                
+
             }
             catch (Exception)
             {

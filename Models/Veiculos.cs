@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SistemaCadastro.Models
 
@@ -15,37 +10,37 @@ namespace SistemaCadastro.Models
         [Display(Name = "Id")]
         public int VeiculosId { get; set; }
 
-        
+
         public string Placa { get; set; }
 
-        
+
         public int Renavam { get; set; }
 
-        
+
         public string Chassi { get; set; }
 
-        
+
         public string Motor { get; set; }
 
-        
+
         public string Marca { get; set; }
 
-        
+
         public string Modelo { get; set; }
 
-        
+
         public string Combustivel { get; set; }
 
-        
+
         public string Cor { get; set; }
 
-        
+
         public int Ano { get; set; }
 
-        
+
         public string Status { get; set; }
 
-        
+
     }
 
 }
